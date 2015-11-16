@@ -35,6 +35,12 @@ class Cursor(object):
         resp = self.connection.proxy.post('query', json=data)
 
         column_metas = resp['columnMetas']
+
+        #解决kylin meta字段大写的问题
+        for c in column_metas:
+            c['label']=str(c['label']).lower()
+            c['name']=str(c['name']).lower()
+
         self.description = [
             [c['label'], c['columnTypeName'],
              c['displaySize'], 0,
@@ -54,6 +60,9 @@ class Cursor(object):
             column = meta[i]
             tpe = column[1]
             val = result[i]
+            #skip null value
+            if val is None:
+                pass
             if tpe == 'DATE':
                 val = parser.parse(val)
             elif tpe == 'BIGINT' or tpe == 'INT' or tpe == 'TINYINT':
@@ -62,6 +71,8 @@ class Cursor(object):
                 val = float(val)
             elif tpe == 'BOOLEAN':
                 val = (val == 'true')
+            elif tpe == 'DECIMAL':
+                val = decimal_DIGITS
             result[i] = val
         return result
 
