@@ -71,8 +71,6 @@ class Cursor(object):
                 val = float(val)
             elif tpe == 'BOOLEAN':
                 val = (val == 'true')
-            elif tpe == 'DECIMAL':
-                val = decimal_DIGITS
             result[i] = val
         return result
 

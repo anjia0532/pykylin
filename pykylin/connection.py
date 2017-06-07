@@ -29,7 +29,9 @@ class Connection(object):
         route = 'tables_and_columns'
         params = {'project': self.project}
         tables = self.proxy.get(route, params=params)
-        return [t['table_NAME'] for t in tables]
+        tableNames= [t['table_NAME'] for t in tables]
+        logger.info(str(tableNames))
+        return tableNames
 
     def list_columns(self, table_name):
         table_NAME = str(table_name).upper()
@@ -43,7 +45,9 @@ class Connection(object):
         route = 'tables_and_columns'
         params = {'project': self.project}
         tables = self.proxy.get(route, params=params)
-        return [t['table_SCHEM'] for t in tables]
+        schemas = [t['table_SCHEM'] for t in tables]
+        logger.info(str(schemas))
+        return schemas
 
     def cursor(self):
         return Cursor(self)

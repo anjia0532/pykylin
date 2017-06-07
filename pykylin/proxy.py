@@ -48,7 +48,9 @@ class Proxy(object):
             finally:
                 raise Error('Error when requesting: "%s", exception: "%s"' % (route, exception))
 
-        return decode(resp.text)
+        responseText= decode(resp.text)
+        logger.info('response text is: '+responseText)
+        return responseText
 
     def post(self, route, **kwargs):
         return self.request('post', route, **kwargs)

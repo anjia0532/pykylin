@@ -155,7 +155,8 @@ class KylinDialect(default.DefaultDialect):
     def has_sequence(self, connection, sequence_name, schema=None):
         return False
 
-    def get_columns(self, connection, table_name, schema=None, **kw):
+    def get_columns(self, engine, table_name, schema=None, **kw):
+        connection = engine.contextual_connect()
         cols = connection.connection.list_columns(table_name)
         return [self._map_column_type(c) for c in cols]
 
