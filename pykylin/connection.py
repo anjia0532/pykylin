@@ -1,11 +1,9 @@
 from __future__ import absolute_import
-
 from .cursor import Cursor
 from .proxy import Proxy
 from .log import logger
 
 class Connection(object):
-
     def __init__(self, username, password, endpoint, project, **kwargs):
         self.endpoint = endpoint
         self.username = username
@@ -13,7 +11,6 @@ class Connection(object):
         self.project = project
         self.proxy = Proxy(self.endpoint)
         self.limit = kwargs['limit'] if 'limit' in kwargs else 50000
-
         self.proxy.login(self.username, self.password)
 
     def close(self):
@@ -51,7 +48,6 @@ class Connection(object):
 
     def cursor(self):
         return Cursor(self)
-
 
 def connect(username='', password='', endpoint='', project='', **kwargs):
     return Connection(username, password, endpoint, project, **kwargs)
