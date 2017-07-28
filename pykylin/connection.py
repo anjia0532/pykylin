@@ -1,7 +1,12 @@
 from __future__ import absolute_import
+
 from .cursor import Cursor
 from .proxy import Proxy
 from .log import logger
+#import sys
+#import importlib,sys
+#reload(sys)
+#sys.setdefaultencoding('utf-8')
 
 class Connection(object):
     def __init__(self, username, password, endpoint, project, **kwargs):
@@ -26,8 +31,7 @@ class Connection(object):
         route = 'tables_and_columns'
         params = {'project': self.project}
         tables = self.proxy.get(route, params=params)
-        tableNames= [t['table_NAME'] for t in tables]
-        logger.info(str(tableNames))
+        tableNames = [t['table_NAME'] for t in tables]
         return tableNames
 
     def list_columns(self, table_name):
@@ -42,9 +46,9 @@ class Connection(object):
         route = 'tables_and_columns'
         params = {'project': self.project}
         tables = self.proxy.get(route, params=params)
-        schemas = [t['table_SCHEM'] for t in tables]
-        logger.info(str(schemas))
-        return schemas
+        schema_names = [t['table_SCHEM'] for t in tables]
+        logger.info("schema_names is : "+str(schema_names))
+        return schema_names
 
     def cursor(self):
         return Cursor(self)

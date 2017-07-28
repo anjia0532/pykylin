@@ -2,7 +2,7 @@ from __future__ import absolute_import
 
 from sqlalchemy import types as sqltypes
 from sqlalchemy.types import INTEGER, BIGINT, SMALLINT, VARCHAR, CHAR, \
-    FLOAT, DATE, BOOLEAN,TIMESTAMP
+    FLOAT, DATE, BOOLEAN, TIMESTAMP
 
 class DOUBLE(sqltypes.Float):
     __visit_name__ = 'DOUBLE'

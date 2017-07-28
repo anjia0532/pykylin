@@ -36,7 +36,6 @@ class Cursor(object):
 
         column_metas = resp['columnMetas']
 
-        #解决kylin meta字段大写的问题
         for c in column_metas:
             c['label']=str(c['label']).lower()
             c['name']=str(c['name']).lower()

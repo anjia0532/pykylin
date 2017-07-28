@@ -49,7 +49,7 @@ class Proxy(object):
                 raise Error('Error when requesting: "%s", exception: "%s"' % (route, exception))
 
         responseText= decode(resp.text)
-        logger.info('response text is: '+responseText)
+        #logger.info('response text is: '+str(responseText))
         return responseText
 
     def post(self, route, **kwargs):
